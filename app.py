@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║       Simulador de Modulación Digital M-aria (M-QAM y M-PSK)                 ║
-║       Autor: Ingeniero de Telecomunicaciones                                 ║
+║       Autor: wendy cardenas villalobos                              ║
 ║       Stack: Python · Streamlit · NumPy · Plotly                             ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
@@ -376,7 +376,7 @@ def quality_label(ber: float) -> tuple[str, str]:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
-    st.markdown("""<div class="header-bar"><div class="main-header">📡 Simulador M-aria</div><div class="sub-header">M-QAM &amp; M-PSK · AWGN Channel · Monte Carlo BER Analysis</div></div>""", unsafe_allow_html=True)
+    st.markdown("""<div class="header-bar"><div class="main-header"> Simulador M-aria</div><div class="sub-header">M-QAM &amp; M-PSK · AWGN Channel · Monte Carlo BER Analysis</div></div>""", unsafe_allow_html=True)
 
     with st.sidebar:
         st.markdown("""<div style='font-family: "Barlow Condensed", sans-serif; font-size:1.1rem; font-weight:700; color:#00d4ff; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid #1e2d45; padding-bottom:8px; margin-bottom:16px;'>⚙ Panel de Control</div>""", unsafe_allow_html=True)
@@ -431,7 +431,7 @@ def main():
     ber_sim_val = sim["ber_sim"] if sim_valid else float("nan")
     ser_sim_val = sim["ser_sim"] if sim_valid else float("nan")
 
-    st.markdown('<div class="section-title">📊 Métricas de Desempeño</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"> Métricas de Desempeño</div>', unsafe_allow_html=True)
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1: st.markdown(kpi_card("Eficiencia Espectral", f"{eta:.0f} b/s/Hz", f"log₂({M}) = {eta:.0f} | Nyquist", "blue"), unsafe_allow_html=True)
@@ -457,7 +457,7 @@ def main():
     for col, (lbl, val, sub) in zip(info_cols, info_data):
         with col: st.markdown(kpi_card(lbl, val, sub, "blue"), unsafe_allow_html=True)
 
-    st.markdown('<div class="section-title">📈 Visualización</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"> Visualización</div>', unsafe_allow_html=True)
     plot_col1, plot_col2 = st.columns(2)
 
     with plot_col1:
@@ -465,13 +465,13 @@ def main():
         tx_idx_plot = sim["tx_indices"] if sim_valid else None
         fig_const = plot_constellation(constellation, rx_plot, tx_idx_plot, mod_type, M, snr_db)
         st.plotly_chart(fig_const, use_container_width=True, config={"displayModeBar": False})
-        if not sim_valid: st.info("💡 Presiona **EJECUTAR SIMULACIÓN** para ver la nube de ruido AWGN.")
+        if not sim_valid: st.info(" Presiona **EJECUTAR SIMULACIÓN** para ver la nube de ruido AWGN.")
 
     with plot_col2:
         fig_ber = plot_ber_curve(mod_type, M, ebn0_db, ber_sim_val if sim_valid else 0.0)
         st.plotly_chart(fig_ber, use_container_width=True, config={"displayModeBar": False})
 
-    st.markdown('<div class="section-title">📋 Tabla de Referencia Teórica</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title"> Tabla de Referencia Teórica</div>', unsafe_allow_html=True)
     ref_snr = 20.0
     ref_ebn0 = ref_snr - 10 * np.log10(np.log2(np.array(M_options)))
     summary_rows = []
@@ -483,7 +483,7 @@ def main():
         summary_rows.append({
             "Modulación": f"{m}-{mod_type}", "k (bits/símbolo)": ki, "η (bits/s/Hz)": ki,
             f"BER teórica @ SNR={ref_snr:.0f}dB": f"{ber_r:.2e}",
-            "Eb/N0 req. (BER=10⁻⁵)": f"{e_r:.1f} dB" if not np.isnan(e_r) else "> 35 dB", "Estado": "✅ ACTIVO" if m == M else "",
+            "Eb/N0 req. (BER=10⁻⁵)": f"{e_r:.1f} dB" if not np.isnan(e_r) else "> 35 dB", "Estado": " ACTIVO" if m == M else "",
         })
 
     st.dataframe(pd.DataFrame(summary_rows), use_container_width=True, hide_index=True)
