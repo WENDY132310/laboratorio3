@@ -1,0 +1,16 @@
+# ══════════════════════════════════════════════════════════════
+#  Simulador M-QAM / M-PSK — Dependencias
+#  Instalar con:  pip install -r requirements.txt
+# ══════════════════════════════════════════════════════════════
+
+# Framework web interactivo
+streamlit>=1.35.0
+
+# Cálculo numérico y generación de señales
+numpy>=1.26.0
+
+# Gráficas interactivas (constelación, BER waterfall)
+plotly>=5.22.0
+
+# Manipulación de datos tabulares (tabla resumen teórico)
+pandas>=2.2.0
